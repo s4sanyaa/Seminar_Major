@@ -33,6 +33,7 @@ public abstract class Enemy : MonoBehaviour, IBehaviourTreeInterface, ITeamInter
 
         _perceptionComponent.onPerceptionTargetChanged += TargetChanged;
         prevPos = transform.position;
+        
     }
 
     private void TargetChanged(GameObject target, bool sensed)
@@ -99,6 +100,7 @@ public abstract class Enemy : MonoBehaviour, IBehaviourTreeInterface, ITeamInter
 
     private void CalculateSpeed()
     {
+        if (MovementComponent == null) return;
         Vector3 posDelta = transform.position - prevPos;
         float speed = posDelta.magnitude / Time.deltaTime;
 
