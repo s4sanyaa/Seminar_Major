@@ -11,7 +11,7 @@ public abstract class DamageComponent : MonoBehaviour
     [SerializeField] protected bool DamageNeutral;
 ITeamInterface teamInterface;
 
-public void SetTeamInterface(ITeamInterface teamInterface)
+public void SetTeamInterfaceSrc(ITeamInterface teamInterface)
 {
     this.teamInterface = teamInterface;
 }

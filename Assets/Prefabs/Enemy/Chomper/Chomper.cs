@@ -30,6 +30,6 @@ public class Chomper : Enemy
  protected override void Start() 
   {
     base.Start();
-    damageComponent.SetTeamInterface(this);
+    damageComponent.SetTeamInterfaceSrc(this);
   }
 }

@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlightHeight: 4
   rigidBody: {fileID: 5683032146207474740}
+  DamageComponent: {fileID: 5080210884561992438}
 --- !u!54 &5683032146207474740
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -217,6 +218,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f5ec17e5de7af24abb3e10f440a1eca, type: 3}
+--- !u!114 &5080210884561992438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3800229858520619618, guid: 7f5ec17e5de7af24abb3e10f440a1eca,
+    type: 3}
+  m_PrefabInstance: {fileID: 991451582659321704}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131ff0c46e3e3d74aa27988f03bd40d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5467151189081993588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5052316387385437724, guid: 7f5ec17e5de7af24abb3e10f440a1eca,
