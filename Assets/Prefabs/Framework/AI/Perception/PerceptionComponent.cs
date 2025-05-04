@@ -12,7 +12,7 @@ public class PerceptionComponent : MonoBehaviour
     public delegate void OnPerceptionTargetChanged(GameObject target, bool sensed);
 
     public event OnPerceptionTargetChanged onPerceptionTargetChanged;
-    void Start()
+    void Awake()
     {
         foreach (SenseComp sense in senses)
         {
@@ -60,5 +60,13 @@ public class PerceptionComponent : MonoBehaviour
             }
         }
 
+    }
+
+    internal void AssignPerceivedStimuli(PerceptionStimuli targetStimuli)
+    {
+        if (senses.Length != 0)
+        {
+            senses[0].AssignPerceivedStimuli(targetStimuli);
+        }
     }
 }

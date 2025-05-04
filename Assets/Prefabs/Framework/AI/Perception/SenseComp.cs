@@ -84,4 +84,18 @@ public abstract class SenseComp : MonoBehaviour
     {
         DrawDebug();
     }
+
+    internal void AssignPerceivedStimuli(PerceptionStimuli targetStimuli)
+    {
+       PerceivableStimuliList.Add(targetStimuli);
+       onPerceptionUpdated?.Invoke(targetStimuli, true);
+       
+       if (ForgettingRoutines.TryGetValue(targetStimuli, out Coroutine forgetCoroutine))
+       {
+           StopCoroutine(forgetCoroutine);
+           ForgettingRoutines.Remove(targetStimuli);
+       }
+
+     //  ForgettingRoutines.Remove(targetStimuli);
+    }
 }

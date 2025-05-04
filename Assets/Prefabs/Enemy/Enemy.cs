@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IBehaviourTreeInterface, ITeamInterface
+public abstract class Enemy : MonoBehaviour, IBehaviourTreeInterface, ITeamInterface, ISpawnInterface
 {
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] Animator animator;
@@ -23,7 +23,13 @@ public abstract class Enemy : MonoBehaviour, IBehaviourTreeInterface, ITeamInter
   {
       return TeamID;
   }
-   protected virtual void Start()
+
+  private void Awake()
+  {
+      _perceptionComponent.onPerceptionTargetChanged += TargetChanged;
+  }
+
+  protected virtual void Start()
     {
         if (healthComponent != null)
         {
@@ -31,7 +37,7 @@ public abstract class Enemy : MonoBehaviour, IBehaviourTreeInterface, ITeamInter
             healthComponent.onTakeDamage += TakenDamage;
         }
 
-        _perceptionComponent.onPerceptionTargetChanged += TargetChanged;
+      
         prevPos = transform.position;
         
     }
@@ -113,4 +119,18 @@ public abstract class Enemy : MonoBehaviour, IBehaviourTreeInterface, ITeamInter
     {
         
     }
+    
+    public void SpawnedBy(GameObject spawnerGameObject)
+    {
+        BehaviourTree spawnerBehaviorTree = spawnerGameObject.GetComponent<BehaviourTree>();
+        if (spawnerBehaviorTree != null && spawnerBehaviorTree.Blackboard.GetBlackboardData<GameObject>("Target", out GameObject spawnerTarget))
+        {
+            PerceptionStimuli targetStimuli = spawnerTarget.GetComponent<PerceptionStimuli>();
+            if (_perceptionComponent && targetStimuli)
+            {
+                _perceptionComponent.AssignPerceivedStimuli(targetStimuli);
+            }
+        }
+    }
+
 }
