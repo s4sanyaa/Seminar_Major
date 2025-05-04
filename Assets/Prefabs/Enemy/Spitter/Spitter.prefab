@@ -188,7 +188,7 @@ MonoBehaviour:
   behaviourTree: {fileID: 4199284595274165923}
   MovementComponent: {fileID: 4251224016302653726}
   TeamID: 2
-  projectilePrefab: {fileID: 1915267153507868933, guid: 94c39cd5a463dd0438805084ed65b8c2,
+  projectilePrefab: {fileID: 4430738528262874131, guid: 2d9bd11fed5f72745a73ccdae6cdf806,
     type: 3}
   launchPoint: {fileID: 7586721087174284573}
 --- !u!114 &4199284595274165923

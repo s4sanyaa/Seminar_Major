@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float FlightHeight;
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] private DamageComponent DamageComponent;
+    [SerializeField] private ParticleSystem explosionVFX;
 
  //   int TeamID = -1;
  private ITeamInterface instigatorTeamInterface;
@@ -47,6 +48,8 @@ public class Projectile : MonoBehaviour
 
   private void Explode()
   {
+      Vector3 pawnPos = transform.position;
+      Instantiate(explosionVFX, pawnPos, Quaternion.identity);
       Destroy(gameObject);
   }
 
