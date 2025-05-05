@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Ability/Fire")]
 public class FireAbility : Ability
 {
     [SerializeField] Scaner ScannerPrefab;
