@@ -35,7 +35,7 @@ public abstract class Ability : ScriptableObject // not instantiated in game wor
     {
         if (abilityOnCooldown) return false;
 
-        if (abilityComponent == null || abilityComponent.TryConsumeStamina(staminaCost))
+        if (abilityComponent == null || !abilityComponent.TryConsumeStamina(staminaCost))
             return false;
 
         // start cooldown
@@ -62,5 +62,10 @@ public abstract class Ability : ScriptableObject // not instantiated in game wor
         yield return new WaitForSeconds( cooldownDuration ) ;
         abilityOnCooldown = false ;
       
+    }
+
+    public float GetCoolDownDuration()
+    {
+        return cooldownDuration;
     }
 }

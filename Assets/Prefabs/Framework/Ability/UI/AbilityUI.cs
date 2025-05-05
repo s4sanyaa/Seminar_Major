@@ -10,6 +10,8 @@ public class AbilityUI : MonoBehaviour
     [SerializeField] Image CooldownWheel;
 
 
+    private bool bIsOnCoolDown = false;
+    private float CooldownCounter = 0f;
     internal void Init(Ability newAbility)
     {
         ability = newAbility;
@@ -21,5 +23,30 @@ public class AbilityUI : MonoBehaviour
     private void StartCooldown()
     {
 
+        if (bIsOnCoolDown) return;
+        StartCoroutine(CooldownCoroutine());
+    }
+
+    IEnumerator CooldownCoroutine()
+    {
+        bIsOnCoolDown = true;
+        CooldownCounter = ability.GetCoolDownDuration();
+        float cooldownDuration = CooldownCounter;
+        CooldownWheel.enabled = true;
+        while (CooldownCounter > 0)
+        {
+            CooldownCounter -= Time.deltaTime;
+            CooldownWheel.fillAmount = CooldownCounter / cooldownDuration;
+            yield return new WaitForEndOfFrame();
+        }
+
+        bIsOnCoolDown = false;
+        CooldownWheel.enabled = false;
+    }
+
+    internal void ActivateAbility()
+    {
+        ability.ActivateAbility();
+        
     }
 }
