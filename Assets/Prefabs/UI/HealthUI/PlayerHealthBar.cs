@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,8 @@ public class PlayerHealthBar : MonoBehaviour
 
    internal void UpdateHealth(float health, float delta, float maxhealth)
    {
-      AmtImage.fillAmount = health/maxhealth;
-      AmtText.SetText(health.ToString());
+      AmtImage.fillAmount = health / maxhealth;
+      int healthAsInt = (int)health;
+      AmtText.SetText(healthAsInt.ToString());
    }
 }
