@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DamageComponent : MonoBehaviour
+public abstract class DamageComponent : MonoBehaviour, ITeamInterface
 
 
 {
@@ -11,6 +11,12 @@ public abstract class DamageComponent : MonoBehaviour
     [SerializeField] protected bool DamageNeutral;
 ITeamInterface teamInterface;
 
+public int GetTeamID()
+{
+    if (teamInterface != null)
+        return teamInterface.GetTeamID();
+    return -1;
+}
 public void SetTeamInterfaceSrc(ITeamInterface teamInterface)
 {
     this.teamInterface = teamInterface;
