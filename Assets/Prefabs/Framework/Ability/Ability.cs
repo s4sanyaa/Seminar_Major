@@ -51,6 +51,10 @@ public abstract class Ability : ScriptableObject // not instantiated in game wor
         abilityComponent.StartCoroutine( CooldownCoroutine ( ) ) ;
     }
 
+    internal Sprite GetAbilityIcon()
+    {
+        return AbilityIcon;
+    }
     IEnumerator CooldownCoroutine()
     {
         abilityOnCooldown = true ;
