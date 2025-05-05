@@ -4,11 +4,24 @@ using UnityEngine;
 
 public abstract class Ability : ScriptableObject // not instantiated in game world - not attached to game object
 {
-    [SerializeField]
-    float staminaCost = 10;
-    AbilityComponent abilityComponent;
+    [SerializeField] private Sprite AbilityIcon;
+    [SerializeField] float staminaCost = 10;
+    [SerializeField] private float cooldownDuration = 2f;
+    
+    public AbilityComponent AbilityComp
+    {
+        get{ return abilityComponent; }
+        private set{ abilityComponent = value; }
+    }
+    public AbilityComponent abilityComp;
+
+   AbilityComponent abilityComponent;
 
     bool abilityOnCooldown = false;
+
+    public delegate void OnCooldownStarted();
+
+    public OnCooldownStarted onCooldownStarted;
 
     internal void InitAbility(AbilityComponent abilityComponent)
     {
@@ -26,8 +39,24 @@ public abstract class Ability : ScriptableObject // not instantiated in game wor
             return false;
 
         // start cooldown
+        StartAbilityCooldown();
         // ...
 
         return true;
+    }
+    void StartAbilityCooldown()
+    {
+       
+       
+        abilityComponent.StartCoroutine( CooldownCoroutine ( ) ) ;
+    }
+
+    IEnumerator CooldownCoroutine()
+    {
+        abilityOnCooldown = true ;
+        onCooldownStarted?.Invoke();
+        yield return new WaitForSeconds( cooldownDuration ) ;
+        abilityOnCooldown = false ;
+      
     }
 }
