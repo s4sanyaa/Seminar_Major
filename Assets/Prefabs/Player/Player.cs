@@ -34,11 +34,16 @@ public class Player : MonoBehaviour, ITeamInterface
 
     [Header("HealthAndDamage")] 
     [SerializeField] private HealthComponent healthComponent;
-    [SerializeField] private PlayerHealthBar HealthBar;
+    [SerializeField] private PlayerValueGuage HealthBar;
 
     [Header("UI")] 
     [SerializeField] private UIManager uiManager;
-    
+
+    [Header("AbilityAndStamina")] 
+    [SerializeField]
+    private AbilityComponent AbilityComponent;
+    [SerializeField] private PlayerValueGuage StaminaBar;
+
     
     private Vector2 moveInput;
     private Vector2 aimInput;
@@ -59,6 +64,14 @@ public class Player : MonoBehaviour, ITeamInterface
         healthComponent.onHealthChange += HealthChanged;
         healthComponent.onHealthEmpty += StartDeathSequence;
         healthComponent.BroadcastHealthValueImmediately();
+
+        AbilityComponent.onStaminaChange += StaminaChanged;
+        AbilityComponent.BroadcastStaminaChangedImmediately();
+    }
+
+    private void StaminaChanged(float newamount, float maxamount)
+    {
+        StaminaBar.UpdateValue(newamount, 0, maxamount);
     }
 
     private void StartDeathSequence()
@@ -70,7 +83,7 @@ public class Player : MonoBehaviour, ITeamInterface
 
     private void HealthChanged(float health, float delta, float maxhealth)
     {
-        HealthBar.UpdateHealth(health, delta, maxhealth);
+        HealthBar.UpdateValue(health, delta, maxhealth);
     }
 
     private void StartSwitchWeapon()

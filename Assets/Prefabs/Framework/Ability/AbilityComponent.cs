@@ -51,13 +51,16 @@ public class AbilityComponent : MonoBehaviour
 
     }
 
+    public void BroadcastStaminaChangedImmediately()
+    {
+        onStaminaChange?.Invoke( stamina , maxStamina ) ;
+    }
     public bool TryConsumeStamina ( float staminaToConsume )
-
     {
         if ( stamina <= staminaToConsume ) return false ;
 
         stamina -= staminaToConsume ;
-        onStaminaChange ?. Invoke ( stamina , maxStamina ) ;
+       BroadcastStaminaChangedImmediately();
         return true ;
     }
 }
